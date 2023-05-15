@@ -10,8 +10,9 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, square } from 'ionicons/icons';
 import Tab1 from './pages/Random';
+import Tab2 from './pages/Randoms';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,7 +41,10 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/random">
-            <Tab1 />
+            <Tab1/>
+          </Route>
+          <Route exact path="/randoms">
+            <Tab2/>
           </Route>
           <Route exact path="/">
             <Redirect to="/random" />
@@ -48,8 +52,12 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="random" href="/random">
-            <IonIcon aria-hidden="true" icon={ellipse} />
+            <IonIcon aria-hidden="true" icon={ellipse}/>
             <IonLabel>Random</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="randoms" href="/randoms">
+            <IonIcon aria-hidden="true" icon={square}/>
+            <IonLabel>Randoms</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
