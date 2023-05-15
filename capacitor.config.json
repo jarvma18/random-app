@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.randomapp",
+  "appName": "random-app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "cordova": {}
+}
