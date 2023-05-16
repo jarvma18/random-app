@@ -1,25 +1,25 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreRandom from '../components/ExploreRandom';
-import './Random.css';
+import ExploreRandoms from '../components/RandomList';
+import './Randomlist.css';
 
-const Random: React.FC = () => {
+const Randoms: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Random</IonTitle>
+          <IonTitle>Randoms</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Random</IonTitle>
+            <IonTitle size="large">Randoms</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreRandom name="Random"/>
+        <ExploreRandoms name="Randoms"/>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Random;
+export default Randoms;

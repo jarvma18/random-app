@@ -11,8 +11,12 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square } from 'ionicons/icons';
-import Tab1 from './pages/Random';
-import Tab2 from './pages/Randoms';
+import { useEffect } from 'react';
+import { createStore } from './services/database.service'
+
+/* Pages */
+import Random from './pages/RandomGenerator';
+import Randoms from './pages/Randomlist';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,34 +39,42 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/random">
-            <Tab1/>
-          </Route>
-          <Route exact path="/randoms">
-            <Tab2/>
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/random" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="random" href="/random">
-            <IonIcon aria-hidden="true" icon={ellipse}/>
-            <IonLabel>Random</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="randoms" href="/randoms">
-            <IonIcon aria-hidden="true" icon={square}/>
-            <IonLabel>Randoms</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  useEffect(() => {
+		const setupStore = async () => {
+			await createStore();
+		}
+		setupStore();
+	}, []);
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/generator">
+              <Random />
+            </Route>
+            <Route exact path="/list">
+              <Randoms />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/generator" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="atab1" href="/generator">
+              <IonIcon aria-hidden="true" icon={square} />
+              <IonLabel>Random generator</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="atab2" href="/list">
+              <IonIcon aria-hidden="true" icon={ellipse} />
+              <IonLabel>Randoms</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+}
 
 export default App;

@@ -1,17 +1,25 @@
-import './ExploreRandoms.css';
+import './GenerateRandom.css';
 import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/react';
 import { useState } from 'react';
+import { setRandom } from '../services/database.service'
 
-interface RandomsProps {
+interface RandomProps {
   name: string;
 }
 
-const ExploreRandoms: React.FC<RandomsProps> = ({ name }) => {
+const ExploreRandom: React.FC<RandomProps> = ({ name }) => {
+  const [currentRandom, setCurrentRandom] = useState(0);
 
+  function generateRandom() {
+    const random = 1000000000000000000 * Math.random();
+    setCurrentRandom(random);
+    setRandom(random);
+  }
+  
   return (
     <div className="container">
       <h1>{name}</h1>
-      {/* <IonButton size="large" onClick={generateRandom}>Click me</IonButton>
+      <IonButton size="large" onClick={generateRandom}>Click me</IonButton>
       { currentRandom ? (
       <IonCard>
         <IonCardHeader>
@@ -23,9 +31,9 @@ const ExploreRandoms: React.FC<RandomsProps> = ({ name }) => {
       </IonCard>
       ) : (
         null
-      )} */}
+      )}
     </div>
   );
 };
 
-export default ExploreRandoms;
+export default ExploreRandom;

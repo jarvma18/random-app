@@ -1,23 +1,30 @@
-import { Storage } from "@ionic/storage";
+import { Storage, Drivers } from "@ionic/storage";
 
 let storage: Storage;
 
 export const createStore = async () => {
-  const store = new Storage();
-  await store.create();
+  storage = new Storage({
+    name: 'database',
+    driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
+  });
+  await storage.create();
 };
 
-export const set = (key: string, val: string) => {
-  storage.set(key, val);
+export const setRandom = async (val: number) => {
+  const key = 'randoms';
+  let randoms = JSON.parse(await storage.get(key));
+  if (!randoms) {
+    await storage.set(key, JSON.stringify([val]));
+    return;
+  }
+  await storage.set(key, JSON.stringify([...randoms, val]));
+  return;
 };
 
-export const get = async (key: string) => {
-  const val = await storage.get(key);
+export const getRandoms = async () => {
+  const key = 'randoms';
+  const val = JSON.parse(await storage.get(key));
   return val;
-};
-
-export const remove = async (key: string) => {
-  await storage.remove(key);
 };
 
 export const clear = async () => {
