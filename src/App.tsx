@@ -15,8 +15,8 @@ import { useEffect } from 'react';
 import { createStore } from './services/database.service'
 
 /* Pages */
-import Random from './pages/RandomGenerator';
-import Randoms from './pages/Randomlist';
+import RandomGenerator from './pages/RandomGenerator';
+import Randoms from './pages/Randoms';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -52,7 +52,7 @@ const App: React.FC = () => {
         <IonTabs>
           <IonRouterOutlet>
             <Route exact path="/generator">
-              <Random />
+              <RandomGenerator />
             </Route>
             <Route exact path="/list">
               <Randoms />
@@ -62,11 +62,11 @@ const App: React.FC = () => {
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="atab1" href="/generator">
+            <IonTabButton tab="tab1" href="/generator">
               <IonIcon aria-hidden="true" icon={square} />
               <IonLabel>Random generator</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="atab2" href="/list">
+            <IonTabButton tab="tab2" href="/list">
               <IonIcon aria-hidden="true" icon={ellipse} />
               <IonLabel>Randoms</IonLabel>
             </IonTabButton>

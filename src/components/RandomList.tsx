@@ -1,31 +1,55 @@
 import './RandomList.css';
-import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/react';
-import { useState } from 'react';
+import {
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel
+} from '@ionic/react';
+import { useState, useEffect } from 'react';
+import { getRandomsPerPage } from '../services/database.service'
 
 interface RandomsProps {
   name: string;
 }
 
-const ExploreRandoms: React.FC<RandomsProps> = ({ name }) => {
+const numberOfItems = 5;
+
+const RandomList: React.FC<RandomsProps> = ({ name }) => {
+  const [items, setItems] = useState<string[]>([]);
+  const [page, setPage] = useState(0);
+
+  async function getRandoms(currentPage: number) {
+    let newItems = await getRandomsPerPage(currentPage, numberOfItems);
+    setItems([...items, ...newItems]);
+    setPage(page + 1)
+  }
+
+  useEffect(() => {
+    setPage(0);
+    getRandoms(page);
+  }, []);
 
   return (
     <div className="container">
       <h1>{name}</h1>
-      {/* <IonButton size="large" onClick={generateRandom}>Click me</IonButton>
-      { currentRandom ? (
-      <IonCard>
-        <IonCardHeader>
-          <IonCardTitle>Value</IonCardTitle>
-        </IonCardHeader>
-        <IonCardContent>
-          {currentRandom}
-        </IonCardContent>
-      </IonCard>
-      ) : (
-        null
-      )} */}
+      <IonContent fullscreen>
+        <IonList>
+          {items.map((item) => (
+            <IonItem key={item}>
+              <IonLabel>{item}</IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
+        <IonInfiniteScroll onIonInfinite={(ev) => {
+          getRandoms(page); setTimeout(() => ev.target.complete(), 500);
+        }}>
+          <IonInfiniteScrollContent></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
+      </IonContent>
     </div>
   );
 };
 
-export default ExploreRandoms;
+export default RandomList;

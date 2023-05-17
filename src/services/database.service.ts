@@ -2,6 +2,10 @@ import { Storage, Drivers } from "@ionic/storage";
 
 let storage: Storage;
 
+function pageTimesItems(page: number, itemsPerPage: number) {
+  return page * itemsPerPage;
+}
+
 export const createStore = async () => {
   storage = new Storage({
     name: 'database',
@@ -21,9 +25,12 @@ export const setRandom = async (val: number) => {
   return;
 };
 
-export const getRandoms = async () => {
+export const getRandomsPerPage = async (page: number, itemsPerPage: number) => {
   const key = 'randoms';
-  const val = JSON.parse(await storage.get(key));
+  const startingIndex = pageTimesItems(page, itemsPerPage);
+  const endingIndex = itemsPerPage + pageTimesItems(page, itemsPerPage);
+  let val = JSON.parse(await storage.get(key));
+  val = val.slice(startingIndex, endingIndex);
   return val;
 };
 
