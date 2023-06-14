@@ -5,7 +5,8 @@ import {
   IonContent,
   IonList,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonPage
 } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { getRandomsPerPage } from '../services/database.service'
@@ -14,7 +15,7 @@ interface RandomsProps {
   name: string;
 }
 
-const numberOfItems = 5;
+const numberOfItems = 20;
 
 const RandomList: React.FC<RandomsProps> = ({ name }) => {
   const [items, setItems] = useState<string[]>([]);
@@ -32,7 +33,7 @@ const RandomList: React.FC<RandomsProps> = ({ name }) => {
   }, []);
 
   return (
-    <div className="container">
+    <IonPage>
       <h1>{name}</h1>
       <IonContent fullscreen>
         <IonList>
@@ -43,12 +44,12 @@ const RandomList: React.FC<RandomsProps> = ({ name }) => {
           ))}
         </IonList>
         <IonInfiniteScroll onIonInfinite={(ev) => {
-          getRandoms(page); setTimeout(() => ev.target.complete(), 500);
+          getRandoms(page); setTimeout(() => ev.target.complete(), 100);
         }}>
           <IonInfiniteScrollContent></IonInfiniteScrollContent>
         </IonInfiniteScroll>
       </IonContent>
-    </div>
+    </IonPage>
   );
 };
 

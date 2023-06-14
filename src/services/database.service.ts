@@ -30,8 +30,10 @@ export const getRandomsPerPage = async (page: number, itemsPerPage: number) => {
   const startingIndex = pageTimesItems(page, itemsPerPage);
   const endingIndex = itemsPerPage + pageTimesItems(page, itemsPerPage);
   let val = JSON.parse(await storage.get(key));
-  val = val.slice(startingIndex, endingIndex);
-  return val;
+  if (val) {
+    val = val.slice(startingIndex, endingIndex);
+    return val;
+  }
 };
 
 export const clear = async () => {

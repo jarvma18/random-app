@@ -5,13 +5,8 @@ import './RandomGenerator.css';
 const RandomGenerator: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Random generator</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
-        <GenerateRandom name="Random"/>
+        <GenerateRandom name="Random generator"/>
       </IonContent>
     </IonPage>
   );
