@@ -16,6 +16,8 @@ interface RandomsProps {
 }
 
 const numberOfItems = 20;
+const contentText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\
+  Pellentesque pellentesque ipsum sit amet elit bibendum, a pretium risus placerat."
 
 const RandomList: React.FC<RandomsProps> = ({ name }) => {
   const [items, setItems] = useState<string[]>([]);
@@ -34,8 +36,9 @@ const RandomList: React.FC<RandomsProps> = ({ name }) => {
 
   return (
     <IonPage>
-      <h1>{name}</h1>
-      <IonContent fullscreen>
+      <IonContent fullscreen class="ion-padding">
+        <h1>{name}</h1>
+        <p>{ contentText }</p>
         <IonList>
           {items.map((item) => (
             <IonItem key={item}>
@@ -44,7 +47,7 @@ const RandomList: React.FC<RandomsProps> = ({ name }) => {
           ))}
         </IonList>
         <IonInfiniteScroll onIonInfinite={(ev) => {
-          getRandoms(page); setTimeout(() => ev.target.complete(), 100);
+          getRandoms(page); setTimeout(() => ev.target.complete(), 500);
         }}>
           <IonInfiniteScrollContent></IonInfiniteScrollContent>
         </IonInfiniteScroll>
