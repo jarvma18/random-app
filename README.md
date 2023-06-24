@@ -6,7 +6,8 @@
 # Build for android
 ionic cap build android --prod
 
-# There was problems with components, when the App was simulated with android studio, here is local libraries:
+# There was problems with components, when the App was simulated with android studio
+# here is local libraries:
 
 npm ls --depth=0
 ionic-app-base@0.0.0 /home/markus/Repos/random-app
