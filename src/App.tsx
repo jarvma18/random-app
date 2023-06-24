@@ -7,7 +7,9 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact
+  setupIonicReact,
+  IonContent,
+  IonPage
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square } from 'ionicons/icons';
@@ -15,8 +17,8 @@ import { useEffect } from 'react';
 import { createStore } from './services/database.service'
 
 /* Pages */
-import RandomGenerator from './pages/RandomGenerator';
-import Randoms from './pages/Randoms';
+import RandomList from './components/RandomList';
+import GenerateRandom from './components/GenerateRandom';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -52,13 +54,21 @@ const App: React.FC = () => {
         <IonTabs>
           <IonRouterOutlet>
             <Route exact path="/generator">
-              <RandomGenerator />
+            <IonPage>
+              <IonContent fullscreen>
+                <GenerateRandom name="Random generator"/>
+              </IonContent>
+            </IonPage>
             </Route>
             <Route exact path="/list">
-              <Randoms />
+            <IonPage>
+              <IonContent fullscreen>
+                <RandomList name="Randoms"/>
+              </IonContent>
+            </IonPage>
             </Route>
             <Route exact path="/">
-              <Redirect to="/generator" />
+              <Redirect to="/generator"/>
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
