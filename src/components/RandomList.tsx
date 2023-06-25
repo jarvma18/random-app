@@ -9,7 +9,7 @@ import {
   IonPage
 } from '@ionic/react';
 import { useState, useEffect } from 'react';
-import { getRandomsPerPage } from '../services/database.service'
+import { getRandomsPerPage, createStore } from '../services/database.service'
 
 interface RandomsProps {
   name: string;
@@ -30,8 +30,12 @@ const RandomList: React.FC<RandomsProps> = ({ name }) => {
   }
 
   useEffect(() => {
+    const setupStore = async () => {
+			await createStore();
+		}
+		setupStore();
     setPage(0);
-    getRandoms(page);
+    getRandoms(0);
   }, []);
 
   return (

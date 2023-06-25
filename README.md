@@ -1,10 +1,19 @@
 # random-app
 
+This is test ionic project that allows user to get randomized numbers and the previous values are saved to database.
+Previous values can also be viewed.
+
 ## Commands
 
 ```
+# Start locally
+ionic serve
+
 # Build for android
 ionic cap build android --prod
+
+# Inspect local devices chrome:
+chrome://inspect/#devices
 
 # There was problems with components, when the App was simulated with android studio
 # here is local libraries:

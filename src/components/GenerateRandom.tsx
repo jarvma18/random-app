@@ -9,7 +9,7 @@ import {
   IonContent
 } from '@ionic/react';
 import { useState } from 'react';
-import { setRandom } from '../services/database.service'
+import { setRandom, createStore } from '../services/database.service'
 
 interface RandomProps {
   name: string;
@@ -30,6 +30,10 @@ const GenerateRandom: React.FC<RandomProps> = ({ name }) => {
   const [currentRandom, setCurrentRandom] = useState(0);
 
   function generateRandom() {
+    const setupStore = async () => {
+			await createStore();
+		}
+		setupStore();
     const random = randomBase * Math.random();
     setCurrentRandom(random);
     setRandom(random);
