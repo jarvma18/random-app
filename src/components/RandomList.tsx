@@ -31,9 +31,9 @@ const RandomList: React.FC<RandomsProps> = ({ name }) => {
 
   useEffect(() => {
     const setupStore = async () => {
-			await createStore();
-		}
-		setupStore();
+      await createStore();
+    }
+    setupStore();
     setPage(0);
     getRandoms(0);
   }, []);
